@@ -1,0 +1,17 @@
+[versions]
+kotlin = "1.9.23"
+docker = "9.4.0"
+release-github = "2.5.2"
+download = "5.6.0"
+gson = "2.10.1"
+
+[libraries]
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+download-gradle-plugin = { group = "de.undercouch.download", name = "de.undercouch.download.gradle.plugin", version.ref = "download" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+
+[plugins]
+docker-api = { id = "com.bmuschko.docker-remote-api", version.ref = "docker" }
+release-github = { id = "com.github.breadmoirai.github-release", version.ref = "release-github" }
+
+[bundles]
