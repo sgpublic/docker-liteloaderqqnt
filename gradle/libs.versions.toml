@@ -1,17 +1,23 @@
 [versions]
-kotlin = "1.9.23"
 docker = "9.4.0"
 release-github = "2.5.2"
+kotlin = "1.9.23"
+buildsrc-utils = "1.0.0-alpha02"
+
 download = "5.6.0"
 gson = "2.10.1"
+jgit = "6.8.0.202311291450-r"
 
 [libraries]
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 download-gradle-plugin = { group = "de.undercouch.download", name = "de.undercouch.download.gradle.plugin", version.ref = "download" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit" }
+jgit-apache = { group = "org.eclipse.jgit", name = "org.eclipse.jgit.ssh.apache", version.ref = "jgit" }
 
 [plugins]
 docker-api = { id = "com.bmuschko.docker-remote-api", version.ref = "docker" }
 release-github = { id = "com.github.breadmoirai.github-release", version.ref = "release-github" }
+buildsrc-utils = { id = "io.github.sgpublic.buildsrc-utils", version.ref = "buildsrc-utils" }
 
 [bundles]

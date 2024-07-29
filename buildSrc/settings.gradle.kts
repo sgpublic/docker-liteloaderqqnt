@@ -8,6 +8,6 @@
 dependencyResolutionManagement {
     // Reuse version catalog from the main build.
     versionCatalogs {
-        create("ql", { from(files("../gradle/ql.versions.toml")) })
+        create("libs") { from(files("../gradle/libs.versions.toml")) }
     }
 }
