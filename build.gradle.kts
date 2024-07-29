@@ -63,7 +63,7 @@ tasks {
         environmentVariable(provider {
             mapOf(
                 "APP_NAME" to "LiteLoaderQQNT",
-                "APP_VERSION" to "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-$version",
+                "APP_VERSION" to "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}",
                 "LITELOADERQQNT_PROFILE" to "\$XDG_CONFIG_HOME/LiteLoaderProfile",
                 "LITELOADERQQNT_HOME" to "\$XDG_CONFIG_HOME/LiteLoaderQQNT",
             )
@@ -74,7 +74,7 @@ tasks {
         dependsOn(dockerCreateDockerfile)
         inputDir = layout.buildDirectory.dir("docker-linuxqq")
         dockerFile = dockerCreateDockerfile.destFile
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-$version" })
+        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
         images.add(provider { "$tag:${versionInfo["linuxqq.version"]}" })
         images.add(provider { "$tag:${versionInfo["llqqnt.version"]}" })
         images.add("$tag:latest")
@@ -84,7 +84,7 @@ tasks {
     val dockerPushBuildBookImageOfficial by creating(DockerPushImage::class) {
         group = "docker"
         dependsOn(dockerBuildImage)
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-$version" })
+        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
         images.add(provider { "$tag:${versionInfo["linuxqq.version"]}" })
         images.add(provider { "$tag:${versionInfo["llqqnt.version"]}" })
         images.add("$tag:latest")
@@ -96,8 +96,8 @@ tasks {
         }
         owner = "sgpublic"
         repo = "docker-liteloaderqqnt"
-        tagName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-$version" }
-        releaseName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-$version" }
+        tagName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" }
+        releaseName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" }
         overwrite = true
     }
 }

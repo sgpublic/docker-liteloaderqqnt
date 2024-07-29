@@ -54,9 +54,13 @@ abstract class VersionInfo: DefaultTask() {
         content.add("llqqnt.url", llqqntUrl)
 
         content.add("llqqnt.file", JsonPrimitive("LiteLoaderQQNT-${llqqntVersion}.zip"))
-        content.add("dockerimage.version", JsonPrimitive(project.version.toString()))
+
+        var dockerImageVersion = project.version.toString().toLong()
+        content.add("dockerimage.version", JsonPrimitive(dockerImageVersion))
 
         if (content != readCache()) {
+            dockerImageVersion += 1
+            content.add("dockerimage.version", JsonPrimitive(dockerImageVersion))
             cacheFile.writeText(GsonBuilder()
                 .setPrettyPrinting()
                 .create()
@@ -70,7 +74,7 @@ abstract class VersionInfo: DefaultTask() {
                     .setAuthor("updater", "updater@example.com")
                     .call()
                 git.tag()
-                    .setName("${linuxqqVersion}-${llqqntVersion}-${project.version}")
+                    .setName("${linuxqqVersion}-${llqqntVersion}-${dockerImageVersion}")
                     .call()
                 git.push()
                     .also {
