@@ -36,10 +36,10 @@ abstract class VersionInfo: DefaultTask() {
 
         val content = JsonObject()
 
-        val linuxqq = NetJsonArray("https://${dockerLinuxqqRepoHost.getOrElse("gitlab.com")}/api/v4/projects/105/repository/tags")
-            .get(0).asJsonObject.get("name")
+        val linuxqqVersion = NetJsonArray("https://${dockerLinuxqqRepoHost.getOrElse("gitlab.com")}/api/v4/projects/105/repository/tags")
+            .get(0).asJsonObject.get("name").asString
 
-        content.add("linuxqq.version", linuxqq)
+        content.add("linuxqq.version", JsonPrimitive(linuxqqVersion))
 
         val llqqnt = NetJsonObject("https://api.github.com/repos/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest")
 
@@ -66,16 +66,20 @@ abstract class VersionInfo: DefaultTask() {
             if (!isInit) {
                 git.add().addFilepattern("liteloaderqqnt.json").call()
                 git.commit()
-                    .setMessage("chore(linuxqq): update liteloaderqqnt $llqqntVersion, linuxqq $linuxqq")
+                    .setMessage("chore(linuxqq): update liteloaderqqnt $llqqntVersion, linuxqq $linuxqqVersion")
                     .setAuthor("updater", "updater@example.com")
                     .call()
                 git.tag()
-                    .setName("${content}-${llqqntVersion}-${project.version}")
+                    .setName("${linuxqqVersion}-${llqqntVersion}-${project.version}")
                     .call()
                 git.push()
-                    .setCredentialsProvider(UsernamePasswordCredentialsProvider(
-                        "mhmzx", token.get()
-                    ))
+                    .also {
+                        if (token.orNull != null) {
+                            it.setCredentialsProvider(UsernamePasswordCredentialsProvider(
+                                "mhmzx", token.get()
+                            ))
+                        }
+                    }
                     .setPushAll().setPushTags().call()
             }
         }
