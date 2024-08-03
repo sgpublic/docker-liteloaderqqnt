@@ -24,7 +24,7 @@ services:
 | GROUP_ID                    | 运行 QQ 所使用的用户组 ID                                          | 1000                               |
 | KEEP_APP_RUNNING            | 保持应用运行，当 QQ 意外停止时自动重启，`1` 表示开启                            | 0                                  |
 | SECURE_CONNECTION           | 为 noVNC 启用 HTTPS 访问                                       | 0                                  |
-| WEB_AUTHENTICATION          | 为 noVNC 启用认证保护                                            | 0                                  |
+| WEB_AUTHENTICATION          | 为 noVNC 启用认证保护，需开启 `SECURE_CONNECTION` 才能开启               | 0                                  |
 | WEB_AUTHENTICATION_USERNAME | noVNC 认证用户名                                               | （若启用 `WEB_AUTHENTICATION` 则必填）     |
 | WEB_AUTHENTICATION_PASSWORD | noVNC 认证密码                                                | （若启用 `WEB_AUTHENTICATION` 则必填）     |
 | WEB_LISTENING_PORT          | noVNC 端口                                                  | 5800                               |
