@@ -11,7 +11,7 @@ services:
     image: mhmzx/docker-liteloaderqqnt:v1.2.0
     restart: unless-stopped
     ports:
-      - 5900:5900
+      - 5800:5800
     volumes:
       - /path/to/config:/home/linuxqq/config
 ```
