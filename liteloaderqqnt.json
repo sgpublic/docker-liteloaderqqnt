@@ -3,5 +3,5 @@
   "llqqnt.version": "v1.2.0",
   "llqqnt.url": "https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.2.0/LiteLoaderQQNT.zip",
   "llqqnt.file": "LiteLoaderQQNT-v1.2.0.zip",
-  "dockerimage.version": 7
+  "dockerimage.version": 14
 }
