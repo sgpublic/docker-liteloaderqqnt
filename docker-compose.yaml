@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  # 仅供开发测试的 docker-compose 文件，一般用户请使用 README.md 中给出的示例！
+  linuxqq:
+    build:
+      context: build/docker-linuxqq
+      dockerfile: Dockerfile
+    hostname: linuxqq-little-paimon
+    restart: unless-stopped
+    ports:
+      - 5800:5800
+      - 6010:6010
+    environment:
+      SECURE_CONNECTION: 1
+      WEB_AUTHENTICATION: 1
+      WEB_AUTHENTICATION_USERNAME: "test"
+      WEB_AUTHENTICATION_PASSWORD: "test"
+      WEB_PATH_PREFIX: /test/prefix
+    volumes:
+      - ./config:/home/linuxqq/config
+      - ./config/baseimage-gui:/config

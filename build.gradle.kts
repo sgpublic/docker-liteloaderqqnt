@@ -10,6 +10,7 @@ import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.github.breadmoirai.githubreleaseplugin.GithubReleaseTask
 import de.undercouch.gradle.tasks.download.Download
 import io.github.sgpublic.VersionInfo
+import io.github.sgpublic.command
 import io.github.sgpublic.gradle.VersionGen
 
 plugins {
@@ -63,11 +64,16 @@ tasks {
         environmentVariable(provider {
             mapOf(
                 "APP_NAME" to "LiteLoaderQQNT",
-                "APP_VERSION" to "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}",
+                "APP_VERSION" to "${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}",
+                "DOCKER_IMAGE_VERSION" to "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}",
                 "LITELOADERQQNT_PROFILE" to "\$XDG_CONFIG_HOME/LiteLoaderProfile",
                 "LITELOADERQQNT_HOME" to "\$XDG_CONFIG_HOME/LiteLoaderQQNT",
             )
         })
+        runCommand(command(
+            "chown 1000:1000 \$QQ_HOME/resources/app",
+            "chown 1000:1000 \$QQ_HOME/resources/app/application",
+        ))
     }
     val dockerBuildImage by creating(DockerBuildImage::class) {
         group = "docker"
