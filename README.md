@@ -8,7 +8,7 @@
 version: '3.1'
 services:
   linuxqq:
-    image: mhmzx/docker-liteloaderqqnt:v1.2.0
+    image: mhmzx/docker-liteloaderqqnt:latest
     restart: unless-stopped
     ports:
       - 5800:5800
