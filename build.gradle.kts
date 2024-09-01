@@ -9,6 +9,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.github.breadmoirai.githubreleaseplugin.GithubReleaseTask
 import de.undercouch.gradle.tasks.download.Download
+import io.github.sgpublic.CreateTag
 import io.github.sgpublic.VersionInfo
 import io.github.sgpublic.command
 import io.github.sgpublic.gradle.VersionGen
@@ -26,8 +27,10 @@ tasks {
     val tag = "mhmzx/docker-liteloaderqqnt"
 
     val versionInfo by creating(VersionInfo::class) {
-        token = findEnv("publishing.gitlab.token")
         dockerLinuxqqRepoHost = findEnv("publishing.gitlab.host")
+    }
+    val createTag by creating(CreateTag::class) {
+        token = findEnv("publishing.gitlab.token")
     }
 
     val downloadLiteLoader by creating(Download::class) {

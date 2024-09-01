@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import org.eclipse.jgit.api.Git
-import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider
 import org.gradle.api.DefaultTask
+import org.gradle.api.Task
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
@@ -16,10 +16,7 @@ abstract class VersionInfo: DefaultTask() {
     override fun getGroup() = "liteloaderqqnt"
 
     private var cache: JsonObject? = null
-    private val cacheFile = File(project.rootDir, "liteloaderqqnt.json")
 
-    @get:Input
-    abstract val token: Property<String>
     @get:Input
     abstract val dockerLinuxqqRepoHost: Property<String>
 
@@ -28,12 +25,7 @@ abstract class VersionInfo: DefaultTask() {
         info()
     }
 
-    private fun info(): JsonObject = Git.open(project.rootDir).use { git ->
-        val isInit = !cacheFile.exists()
-        if (git.status().call().hasUncommittedChanges() && !isInit) {
-            throw IllegalStateException("Please commit all the change before getting linuxqq version info!")
-        }
-
+    private fun info(): JsonObject {
         val content = JsonObject()
 
         val linuxqqVersion = NetJsonArray("https://${dockerLinuxqqRepoHost.getOrElse("gitlab.com")}/api/v4/projects/105/repository/tags")
@@ -66,26 +58,6 @@ abstract class VersionInfo: DefaultTask() {
                 .create()
                 .toJson(content))
             this.cache = content
-
-            if (!isInit) {
-                git.add().addFilepattern("liteloaderqqnt.json").call()
-                git.commit()
-                    .setMessage("chore(linuxqq): update liteloaderqqnt $llqqntVersion, linuxqq $linuxqqVersion")
-                    .setAuthor("updater", "updater@example.com")
-                    .call()
-                git.tag()
-                    .setName("${linuxqqVersion}-${llqqntVersion}-${dockerImageVersion}")
-                    .call()
-                git.push()
-                    .also {
-                        if (token.orNull != null) {
-                            it.setCredentialsProvider(UsernamePasswordCredentialsProvider(
-                                "mhmzx", token.get()
-                            ))
-                        }
-                    }
-                    .setPushAll().setPushTags().call()
-            }
         }
 
         return content
@@ -108,3 +80,5 @@ abstract class VersionInfo: DefaultTask() {
         }
     }
 }
+
+val Task.cacheFile: File get() = File(project.rootDir, "liteloaderqqnt.json")
