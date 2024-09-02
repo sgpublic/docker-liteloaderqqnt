@@ -24,4 +24,4 @@ services:
 | LITELOADERQQNT_PROFILE      | LiteLoaderQQNT 数据文件目录                                     | $XDG_CONFIG_HOME/LiteLoaderProfile |
 | LITELOADERQQNT_HOME         | LiteLoaderQQNT 安装目录，若需使用外部 LiteLoaderQQNT 安装实例可修改此目录或直接挂载 | $XDG_CONFIG_HOME/LiteLoaderQQNT    |
 
-其他环境变量请参阅：[sgpublic/docker-linuxqq](https://github.com/jsgpublic/docker-linuxqq?tab=readme-ov-file#食用方法)
+其他环境变量请参阅：[sgpublic/docker-linuxqq](https://github.com/sgpublic/docker-linuxqq?tab=readme-ov-file#食用方法)
