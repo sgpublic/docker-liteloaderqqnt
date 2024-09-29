@@ -1,7 +1,7 @@
 {
-  "linuxqq.version": "v3.2.12_240819-15",
-  "llqqnt.version": "v1.2.1",
-  "llqqnt.url": "https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.2.1/LiteLoaderQQNT.zip",
-  "llqqnt.file": "LiteLoaderQQNT-v1.2.1.zip",
-  "dockerimage.version": 17
+  "linuxqq.version": "3.2.12_240927-18",
+  "llqqnt.version": "1.2.2",
+  "llqqnt.url": "https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/1.2.2/LiteLoaderQQNT.zip",
+  "llqqnt.file": "LiteLoaderQQNT-1.2.2.zip",
+  "dockerimage.version": 21
 }
