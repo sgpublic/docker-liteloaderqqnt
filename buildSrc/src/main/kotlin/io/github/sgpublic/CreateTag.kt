@@ -32,7 +32,7 @@ abstract class CreateTag: DefaultTask() {
                 .setAuthor("updater", "updater@example.com")
                 .call()
             git.tag()
-                .setName("${linuxqqVersion}-${llqqntVersion}-${dockerImageVersion}")
+                .setName("v${linuxqqVersion}-v${llqqntVersion}-${dockerImageVersion}")
                 .call()
             git.push()
                 .also {

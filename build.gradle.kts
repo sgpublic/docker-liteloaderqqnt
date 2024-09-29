@@ -61,7 +61,7 @@ tasks {
         }
         group = "docker"
         destFile = layout.buildDirectory.file("docker-linuxqq/Dockerfile")
-        from(provider { Dockerfile.From("mhmzx/docker-linuxqq:${versionInfo["linuxqq.version"]}") })
+        from(provider { Dockerfile.From("mhmzx/docker-linuxqq:v${versionInfo["linuxqq.version"]}") })
         workingDir("/tmp")
         copyFile("./rootf", "/")
         environmentVariable(provider {
@@ -83,9 +83,9 @@ tasks {
         dependsOn(dockerCreateDockerfile)
         inputDir = layout.buildDirectory.dir("docker-linuxqq")
         dockerFile = dockerCreateDockerfile.destFile
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}" })
-        images.add(provider { "$tag:${versionInfo["llqqnt.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["linuxqq.version"]}-v${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["linuxqq.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["llqqnt.version"]}" })
         images.add("$tag:latest")
         noCache = true
     }
@@ -93,9 +93,9 @@ tasks {
     val dockerPushBuildBookImageOfficial by creating(DockerPushImage::class) {
         group = "docker"
         dependsOn(dockerBuildImage)
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
-        images.add(provider { "$tag:${versionInfo["linuxqq.version"]}" })
-        images.add(provider { "$tag:${versionInfo["llqqnt.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["linuxqq.version"]}-v${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["linuxqq.version"]}" })
+        images.add(provider { "$tag:v${versionInfo["llqqnt.version"]}" })
         images.add("$tag:latest")
     }
 

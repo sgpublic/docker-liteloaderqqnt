@@ -15,5 +15,7 @@ if [ ! -d "$LITELOADERQQNT_PROFILE" ]; then
 fi
 
 QQ_APP_HOME=$QQ_HOME/resources/app
-sed -i "/\/\/ add for LiteLoaderQQNT/d" $QQ_APP_HOME/app_launcher/index.js
-sed -i "1i\require('$LITELOADERQQNT_HOME'); \/\/ add for LiteLoaderQQNT" $QQ_APP_HOME/app_launcher/index.js
+LITELOADER_IS=$QQ_APP_HOME/app_launcher/liteloader.js
+rm -f $LITELOADER_IS
+echo "require(String.raw\`$LITELOADERQQNT_HOME\`);" > $LITELOADER_IS
+sed -i "s|.*\"main\".*|\"main\": \"\./app_launcher/liteloader\.js\",|" $QQ_APP_HOME/package.json

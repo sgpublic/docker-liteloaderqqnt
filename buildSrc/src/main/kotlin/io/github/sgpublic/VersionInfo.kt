@@ -28,15 +28,15 @@ abstract class VersionInfo: DefaultTask() {
     private fun info(): JsonObject {
         val content = JsonObject()
 
-        val linuxqqVersion = NetJsonArray("https://${dockerLinuxqqRepoHost.getOrElse("gitlab.com")}/api/v4/projects/105/repository/tags")
-            .get(0).asJsonObject.get("name").asString
+        val linuxqqInfo = NetJsonObject("https://${dockerLinuxqqRepoHost.getOrElse("gitlab.com")}/bot/docker-linuxqq/-/raw/main/linuxqq.json")
+        val linuxqqVersion = "${linuxqqInfo.get("linuxqq.version").asString}-${linuxqqInfo.get("dockerimage.version").asInt}"
 
         content.add("linuxqq.version", JsonPrimitive(linuxqqVersion))
 
         val llqqnt = NetJsonObject("https://api.github.com/repos/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest")
 
         val llqqntVersion = llqqnt.get("tag_name").asString.let {
-            return@let it.takeIf { it.startsWith("v") } ?: "v$it"
+            return@let it.takeIf { !it.startsWith("v") } ?: it.substring(1)
         }
         content.add("llqqnt.version", JsonPrimitive(llqqntVersion))
 
