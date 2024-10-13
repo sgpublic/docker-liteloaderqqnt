@@ -9,9 +9,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerPushImage
 import com.bmuschko.gradle.docker.tasks.image.Dockerfile
 import com.github.breadmoirai.githubreleaseplugin.GithubReleaseTask
 import de.undercouch.gradle.tasks.download.Download
-import io.github.sgpublic.CreateTag
-import io.github.sgpublic.VersionInfo
-import io.github.sgpublic.command
+import io.github.sgpublic.*
 import io.github.sgpublic.gradle.VersionGen
 
 plugins {
@@ -108,6 +106,10 @@ tasks {
         tagName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" }
         releaseName = provider { "${versionInfo["linuxqq.version"]}-${versionInfo["llqqnt.version"]}-${versionInfo["dockerimage.version"]}" }
         overwrite = true
+    }
+
+    val clean by creating(Delete::class) {
+        delete(rootProject.file("build"))
     }
 }
 
