@@ -71,10 +71,6 @@ tasks {
                 "LITELOADERQQNT_HOME" to "\$XDG_CONFIG_HOME/LiteLoaderQQNT",
             )
         })
-        runCommand(command(
-            "chown 1000:1000 \$QQ_HOME/resources/app",
-            "chown 1000:1000 \$QQ_HOME/resources/app/application",
-        ))
     }
     val dockerBuildImage by creating(DockerBuildImage::class) {
         group = "docker"
